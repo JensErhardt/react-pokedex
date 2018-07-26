@@ -9,11 +9,14 @@ class Home extends Component {
   render() {         
     
     console.log (this.props.pokemon)
-    return (
-      <div className="Home">
+    return (  
+
+      !this.props.pokemon || this.props.pokemon && <div className="Home">
+
+
         <h2>POKEMON</h2>
-        {/* <p>Name: {this.props.pokemon.name}</p> */}
-        {/* <img src={this.props.pokemon.sprites.front} alt="poke-front"/> */}
+        <p>Name: {this.props.pokemon.name}</p>
+        {/* <img src={this.props.pokemon.sprites.back} alt="poke-front"/> */}
       </div>
     );
   }
