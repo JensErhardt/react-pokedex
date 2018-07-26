@@ -15,7 +15,7 @@ class Home extends Component {
 
 
         <h2>POKEMON</h2>
-        <p>Name: {this.props.pokemon.name}</p>
+        {/* <p>Name: {this.props.pokemon.name}</p> */}
         {/* <img src={this.props.pokemon.sprites.back} alt="poke-front"/> */}
       </div>
     );
