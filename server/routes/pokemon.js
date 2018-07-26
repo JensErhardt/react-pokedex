@@ -13,19 +13,23 @@ router.get('/call', (req, res, next) => {
       .then(pokeData => {
         // console.log(pokeData.data)
         // console.log("DEBUG pokeData", pokeData.data.name, pokeData.data.weight, pokeData.data.sprites.front_default )
-        let pokemon = {
-          test: "Dies ist ein Test",
+        // let pokemon = {
+        //   name: pokeData.data.name,
+        //   weight: pokeData.data.weight,
+        //   sprites: {
+        //     back: pokeData.data.sprites.back_default,
+        //     front: pokeData.data.sprites.front_default,
+        //   }
+        // };
+        Pokemon.create({ 
           name: pokeData.data.name,
           weight: pokeData.data.weight,
           sprites: {
             back: pokeData.data.sprites.back_default,
             front: pokeData.data.sprites.front_default,
           }
-        };
-        if(pokemon) {
-        Pokemon.create({ pokemon })
+        })
         console.log("DEBUG pokemon saved", i, pokeHttp, pokemon.name)
-        }
       })
       .catch(err => next(err))
   }
