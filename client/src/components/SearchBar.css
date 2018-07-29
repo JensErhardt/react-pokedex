@@ -1,0 +1,12 @@
+#pokemon-search-bar {
+  margin-top: 20px;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid; 
+  border-radius: 0;
+}
+.search-header {
+  margin-top: 20px;
+  text-align: left;
+  font-size: 32 px;
+}

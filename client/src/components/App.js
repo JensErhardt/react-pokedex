@@ -21,6 +21,7 @@ import {
   DropdownItem
 } from 'reactstrap';
 import PokemonList from './PokemonList';
+import Searchbar from './SearchBar';
 
 
 
@@ -28,20 +29,19 @@ import PokemonList from './PokemonList';
 class App extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       pokemon: [],
+      searchValue: ''
     }
     api.loadUser();
 
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  onSetSidebarOpen(open) {
-    this.setState({
-      sidebarOpen: open,
-    })
+  handleChange(e) {
+    let searchValue = e.target.value.toUpperCase();
+    this.setState({ searchValue })
   }
-
 
   componentDidMount() {
     api.getPokemon()
@@ -58,6 +58,9 @@ class App extends Component {
   }
 
   render() {
+
+    let filteredPokemon = this.state.pokemon
+      .filter(pokemon => pokemon.name.toUpperCase().includes(this.state.searchValue.toUpperCase()))
 
     return (
       <div className="App">
@@ -77,8 +80,11 @@ class App extends Component {
           <Route path="/profile" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch> */}
-
-        <PokemonList pokemon ={this.state.pokemon} />
+      
+        <Searchbar
+          onChange={this.handleChange}
+        />
+        <PokemonList pokemon={filteredPokemon} />
 
       </div>
     );
