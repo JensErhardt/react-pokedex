@@ -6,5 +6,5 @@ SPA copy of pokedex.org using pokéapi.co and client / server architecture.
 
 HTML, CSS, React, Bootstrap, MongoDB, Express, Node.js.
 
-in progess.
+
 
