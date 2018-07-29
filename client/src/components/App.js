@@ -21,7 +21,9 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  DropdownItem
+} from 'reactstrap';
+import { slide as Menu } from 'react-burger-menu'
 
 
 
@@ -30,19 +32,21 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
       pokemon: [],
-      collapsed: true,
+      sidebarOpen: false,
     }
+    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     api.loadUser();
+
   }
 
-  toggleNavbar() {
+  onSetSidebarOpen(open) {
     this.setState({
-      collapsed: !this.state.collapsed
-    });
+      sidebarOpen: open,
+    })
   }
+
 
   componentDidMount() {
     let pokeList = [];
@@ -55,30 +59,27 @@ class App extends Component {
         })
       })
   }
+
   handleLogoutClick(e) {
     api.logout()
   }
 
   render() {
+
+    let sidebarContent = <b>Sidebar content</b>;
+
     return (
       <div className="App">
+      
 
+  
+  <Menu>
+        <a id="home" className="menu-item" href="/">Home</a>
+        <a id="about" className="menu-item" href="/about">About</a>
+        <a id="contact" className="menu-item" href="/contact">Contact</a>
+        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
+      </Menu>
 
-        <Navbar color="faded" light>
-          <NavbarBrand href="/" className="mr-auto">reactstrap</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse isOpen={!this.state.collapsed} navbar>
-            <Nav navbar>
-              <NavItem>
-                <NavLink href="/components/">Components</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-        
 
 
 
@@ -101,10 +102,11 @@ class App extends Component {
           <Route path="/profile" component={Secret} />
           <Route render={() => <h2>404</h2>} />
         </Switch>
-        <Home pokemon={this.state.pokemon} />
+        {/* <Home pokemon={this.state.pokemon} /> */}
 
 
-        <Button color="danger">Danger!</Button>
+        {/* <Button color="danger">Danger!</Button> */}
+
       </div>
     );
   }

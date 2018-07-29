@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3030/api',
+  baseURL: process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3031/api',
 });
 
 const errHandler = err => {
@@ -17,20 +17,6 @@ export default {
     .get('/pokemon')
     .then(res => res.data)
     .catch(errHandler);
-  },
-    
-  getCountries() {
-    return service
-    .get('/countries')
-    .then(res => res.data)
-    .catch(errHandler);
-  },
-
-  postCountries(data) {
-    return service
-      .post('/countries', data)
-      .then(res => res.data)
-      .catch(errHandler);
   },
   
   getSecret() {

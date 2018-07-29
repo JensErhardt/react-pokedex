@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
 const pokemonSchema = new mongoose.Schema({
-  test: {
-    type: String
-  },
   name: { 
     type : String 
   },
