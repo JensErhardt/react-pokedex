@@ -4,8 +4,7 @@ const Pokemon = require('../models/pokemon')
 
 var router = express.Router();
 
-// Route to load Pokemon from database
-
+// Route to get all Pokemon from database
 router.get('/', (req, res, next) => {
   console.log("DEBUG pokeRoute '/'")
   Pokemon.find()
