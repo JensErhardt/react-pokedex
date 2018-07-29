@@ -21,7 +21,11 @@ class PokemonList extends Component {
                 {this.props.pokemon
                   .map((e) =>
                     <div className="col-md-1 m-5 pokemon-list-group-item" key={e._id}>
-                      <img className="pokemon-item-sprite-front" src={e.sprites.front} alt="list-item-pic" />
+                      <img 
+                      className="pokemon-item-sprite-front pull-right" 
+                      src={e.sprites.front} 
+                      alt="list-item-pic" 
+                      />
                       {e.name}
                     </div>
                   )}
