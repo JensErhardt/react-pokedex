@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, Switch } from 'react-router-dom';
 import Home from './Home';
-import Countries from './Countries';
-import AddCountry from './AddCountry';
 import Secret from './Secret';
 import Login from './Login';
 import Signup from './Signup';
@@ -23,7 +21,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
-import { slide as Menu } from 'react-burger-menu'
+import PokemonList from './PokemonList';
 
 
 
@@ -34,9 +32,7 @@ class App extends Component {
 
     this.state = {
       pokemon: [],
-      sidebarOpen: false,
     }
-    this.onSetSidebarOpen = this.onSetSidebarOpen.bind(this);
     api.loadUser();
 
   }
@@ -49,11 +45,9 @@ class App extends Component {
 
 
   componentDidMount() {
-    let pokeList = [];
     api.getPokemon()
       .then(pokemon => {
-        pokeList.push(pokemon)
-        console.log("DEBUG pokeList", pokeList)
+        console.log("DEBUG api pokemon", pokemon)
         this.setState({
           pokemon: pokemon,
         })
@@ -66,46 +60,26 @@ class App extends Component {
 
   render() {
 
-    let sidebarContent = <b>Sidebar content</b>;
-
     return (
       <div className="App">
-      
 
-  
-  <Menu>
-        <a id="home" className="menu-item" href="/">Home</a>
-        <a id="about" className="menu-item" href="/about">About</a>
-        <a id="contact" className="menu-item" href="/contact">Contact</a>
-        <a onClick={ this.showSettings } className="menu-item--small" href="">Settings</a>
-      </Menu>
+        <div className="top-bar" />
 
-
-
-
-
-        {/* // <Link to="/">Home</Link> 
-          // <Link to="/countries">Countries</Link> 
-          // <Link to="/add-country">Add country</Link> 
-          // {!api.isLoggedIn() && <Link to="/signup">Signup</Link> }
-          // {!api.isLoggedIn() && <Link to="/login">Login</Link> }
-          // {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link> }
-          // <Link to="/secret">Secret</Link> 
-          // <Link to="/pokemon">Pokemon</Link> */}
-
-        <Switch>
-          <Route path="/" component={Home} />
-          <Route path="/countries" component={Countries} />
-          <Route path="/add-country" component={AddCountry} />
+        {/* <Link to="/">Home</Link>
+        {!api.isLoggedIn() && <Link to="/signup">Signup</Link>}
+        {!api.isLoggedIn() && <Link to="/login">Login</Link>}
+        {api.isLoggedIn() && <Link to="/" onClick={(e) => this.handleLogoutClick(e)}>Logout</Link>}
+        <Link to="/secret">Secret</Link>
+        <Link to="/pokemon">Pokemon</Link> */}
+        {/* <Switch>
+          <Route path="/" exact component={PokemonList}/>
           <Route path="/signup" component={Signup} />
           <Route path="/login" component={Login} />
           <Route path="/profile" component={Secret} />
           <Route render={() => <h2>404</h2>} />
-        </Switch>
-        {/* <Home pokemon={this.state.pokemon} /> */}
+        </Switch> */}
 
-
-        {/* <Button color="danger">Danger!</Button> */}
+        <PokemonList pokemon ={this.state.pokemon} />
 
       </div>
     );
