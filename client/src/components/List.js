@@ -1,32 +1,38 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
+import { Link } from 'react-router-dom';
+
 import './List.css'
 
-class List extends Component {
+class List extends PureComponent {
+
+  flipFront(event, date) {
+    return event.currentTarget.src = date.sprites.front;
+  }
+
+  flipBack(event, date) {
+    return event.currentTarget.src = date.sprites.back;
+  }
 
   render() {
-    console.log("RENDERED")
     return (
       <div className="row">
-        <div className="pokemon-list">
-          <div className="row">
-            {this.props.pokemon
-              .map((e) =>
-                <div className="col-md-1 m-5 pm-list-group-item" key={e._id}>
+        <div className="row">
+          <ul>
+            {this.props.pokemon.map((e) =>
+              <li className="m-1 pm-list-group-item" key={e._id}>
+                <Link className="pm-list-link" to="pokemon/id">
                   <img
-                    className="pull-right"
+                    className="mt-2"
                     src={e.sprites.back}
                     alt="list-item-pic"
-                    onMouseOver={(event) => {
-                      return (event.currentTarget.src = e.sprites.front);
-                    }}
-                    onMouseOut={(event) => {
-                      return event.currentTarget.src = e.sprites.back;
-                    }}
+                    onMouseOver={(event) => this.flipFront(event, e)}
+                    onMouseOut={(event) => this.flipBack(event, e)}
                   />
-                  {e.name}
-                </div>
-              )}
-          </div>
+                  <span className="sprite-text">{e.name}</span>
+                </Link>
+              </li>
+            )}
+          </ul>
         </div>
       </div>
     );
