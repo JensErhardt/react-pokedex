@@ -8,30 +8,91 @@ var router = express.Router();
 router.get('/', (req, res, next) => {
 
   Pokemon.find()
-  .then(data => {
-    res.json(data)
-  })
-  .catch(err => next(err))
+    .then(data => {
+      res.json(data)
+    })
+    .catch(err => next(err))
 });
 
 // Bootstrap db
-router.get('/call', (req, res, next) => {
+router.get('/strap/pokemon', (req, res, next) => {
+  const MOBMAX = 150;
 
-  for (let i = 0; i < 25; i++) {
-    const pokeHttp = Math.floor((Math.random() * 500) + 1);
-    axios.get(`http://pokeapi.co/api/v2/pokemon/${pokeHttp}/`)
-      .then(result => {
+  for (let i = 1; i <= MOBMAX; i++) {
+    axios.all([
+      axios.get(`http://pokeapi.co/api/v2/pokemon/${i}/`),
+      axios.get(`https://pokeapi.co/api/v2/pokemon-species/${i}/`)
+    ])
+      .then(axios.spread((resPokemon, resSpecies) => {
+        const data = resPokemon.data;
+        const spec = resSpecies.data;
 
-        Pokemon.create({ 
-          name: result.data.name,
-          weight: result.data.weight,
+        const types = [];
+        for (const i in data.types) {
+          types.push(data.types[i].type.name);
+        }
+
+        const stats = []; let stat;
+        for (const i in data.stats) {
+          stat = {
+            name: data.stats[i].stat.name,
+            base: data.stats[i].base_stat,
+          }
+          stats.push(stat);
+        }
+
+        const varieties = []; let varietie;
+        for (const i in spec.varieties) {
+          varietie = {
+            name: spec.varieties[i].pokemon.name,
+            url: spec.varieties[i].pokemon.url
+          }
+          varieties.push(varietie);
+        }
+
+        let evolvesFrom = "No evolution yet";
+        if (spec.evolves_from_species === !null) {
+          evolvesFrom = spec.evolves_from_species.name;
+        }
+
+        let flavorText = "Description unknown";
+        for (const i in spec.flavor_text_entries) {
+          if (spec.flavor_text_entries[i].language.name === "en") {
+            flavorText = spec.flavor_text_entries[i].flavor_text;
+          }
+        }
+
+        let habitat = "Information unknown";
+        if (spec.habitat === !null) {
+          habitat = spec.habitat.name;
+        }
+
+        const species = {
+          baseHapiness: spec.base_happiness,
+          captureRate: spec.capture_rate,
+          evolvesFrom,
+          habitat,
+          flavorText,
+          varieties
+        };
+
+        Pokemon.create({
+          pokemonId: data.id,
+          name: data.name,
+
+          types,
+          stats,
+          species,
+
+          height: data.height,
+          weight: data.weight,
+
           sprites: {
-            back: result.data.sprites.back_default,
-            front: result.data.sprites.front_default,
+            back: data.sprites.back_default,
+            front: data.sprites.front_default,
           }
         });
-        console.log("DEBUG pokemon saved", i, pokeHttp);
-      })
+      }))
       .catch(err => next(err));
   };
 })

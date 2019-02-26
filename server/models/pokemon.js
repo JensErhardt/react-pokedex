@@ -1,18 +1,51 @@
 const mongoose = require('mongoose');
 
 const pokemonSchema = new mongoose.Schema({
-  name: { 
-    type : String 
+  pokemonId: {
+    type: Number,
   },
-  weight: { 
-    type : String
+  name: {
+    type: String
   },
+
+  types: [
+    String
+  ],
+
+  stats: [
+    {
+      name: String,
+      base: Number,
+    }
+  ],
+
+  species: {
+    baseHapiness: Number,
+    captureRate: Number,
+    evolvesFrom: String,
+    habitat: String,
+    flavorText: String,
+    varieties: [
+      {
+        name: String,
+        url: String
+      }
+    ]
+  },
+
+  height: {
+    type: Number
+  },
+  weight: {
+    type: Number
+  },
+
   sprites: {
-    back: { 
-      type : String 
+    back: {
+      type: String
     },
-    front: { 
-      type : String
+    front: {
+      type: String
     },
   }
 })

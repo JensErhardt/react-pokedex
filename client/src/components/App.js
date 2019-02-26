@@ -46,7 +46,6 @@ class App extends Component {
   componentDidMount() {
     api.getPokemon()
       .then(pokemon => {
-        console.log("DEBUG api pokemon", pokemon)
         this.setState({
           pokemon: pokemon,
         })
