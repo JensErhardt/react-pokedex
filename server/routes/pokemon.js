@@ -4,36 +4,36 @@ const Pokemon = require('../models/pokemon')
 
 var router = express.Router();
 
-// Route to get all Pokemon from database
+// Get all pokemon from db
 router.get('/', (req, res, next) => {
-  console.log("DEBUG pokeRoute '/'")
+
   Pokemon.find()
-  .then(pokeData => {
-    res.json(pokeData)
+  .then(data => {
+    res.json(data)
   })
   .catch(err => next(err))
 });
 
-// Route to populate databse
+// Bootstrap db
 router.get('/call', (req, res, next) => {
-  console.log("DEBUG pokeRoute '/call'")
+
   for (let i = 0; i < 25; i++) {
-    let pokeHttp = Math.floor((Math.random() * 500) + 1);
+    const pokeHttp = Math.floor((Math.random() * 500) + 1);
     axios.get(`http://pokeapi.co/api/v2/pokemon/${pokeHttp}/`)
-      .then(pokeData => {
+      .then(result => {
 
         Pokemon.create({ 
-          name: pokeData.data.name,
-          weight: pokeData.data.weight,
+          name: result.data.name,
+          weight: result.data.weight,
           sprites: {
-            back: pokeData.data.sprites.back_default,
-            front: pokeData.data.sprites.front_default,
+            back: result.data.sprites.back_default,
+            front: result.data.sprites.front_default,
           }
-        })
-        console.log("DEBUG pokemon saved", i, pokeHttp)
+        });
+        console.log("DEBUG pokemon saved", i, pokeHttp);
       })
-      .catch(err => next(err))
-  }
+      .catch(err => next(err));
+  };
 })
 
 
