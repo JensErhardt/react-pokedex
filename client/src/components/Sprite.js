@@ -5,12 +5,14 @@ import "./Sprite.css"
 
 const Sprite = ({ id, name, front, back }) => {
 
-  const flipFront = (event) => {
-    return event.currentTarget.src = front;
+  const flipFront = (e) => {
+    e.preventDefault();
+    return e.currentTarget.src = front;
   }
 
-  const flipBack = (event, date) => {
-    return event.currentTarget.src = back;
+  const flipBack = (e) => {
+    e.preventDefault();
+    return e.currentTarget.src = back;
   }
 
   return (
@@ -19,7 +21,7 @@ const Sprite = ({ id, name, front, back }) => {
         <img
           className="mt-2"
           src={back}
-          alt="list-item-pic"
+          alt="poke-pic"
           onMouseOver={(event) => flipFront(event)}
           onMouseOut={(event) => flipBack(event)}
         />
