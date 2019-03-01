@@ -9,6 +9,7 @@ class Detail extends Component {
   }
 
   render() {
+    console.log(this.props.match.params.id)
     return (
       <div className="container">
         <h1>Pokemon Detail</h1>

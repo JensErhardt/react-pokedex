@@ -9,6 +9,7 @@ import './Home.css';
 class Home extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       pokemon: [],
       searchValue: "",
@@ -29,6 +30,8 @@ class Home extends Component {
   getAllPokemon() {
     api.getPokemon()
       .then(pokemon => {
+        console.log(pokemon)
+
         this.setState({
           pokemon,
         })
@@ -41,11 +44,10 @@ class Home extends Component {
   }
 
   render() {
-
     const pokemon = this.search();
 
     return (
-      <div className="App">
+      <div className="Home">
         <div className="top-bar" />
         <div className="container">
           <h1 className="search-header">Pokedex</h1>

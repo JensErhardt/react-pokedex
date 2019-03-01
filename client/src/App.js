@@ -4,15 +4,13 @@ import { Switch, Route } from 'react-router-dom';
 import Home from './components/Home';
 import Detail from './components/Detail';
 
-import './App.css';
-
 class App extends Component {
   render() {
     return (
       <div className="App">
         <Switch>
-          <Route path="/pokemon/" component={Detail} />
-          
+          <Route path="/pokemon/:id" component={Detail} />
+
           <Home />
         </Switch>
       </div>
