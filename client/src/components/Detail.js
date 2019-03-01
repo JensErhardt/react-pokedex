@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import api from '../api';
+
 class Detail extends Component {
   constructor(props) {
     super(props)
@@ -8,8 +10,19 @@ class Detail extends Component {
     }
   }
 
+  getOne(id) {
+    api.getOnePokemon(id)
+      .then(pokemon => {
+        console.log("Detail getOne", pokemon)
+      })
+      .catch(err => console.log(err));
+  }
+
+  componentDidMount() {
+    this.getOne(this.props.match.params.id)
+  }
+
   render() {
-    console.log(this.props.match.params.id)
     return (
       <div className="container">
         <h1>Pokemon Detail</h1>

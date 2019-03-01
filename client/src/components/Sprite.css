@@ -17,3 +17,18 @@
 .pm-sprite-btn {
   width: 50px;
 }
+
+.pm-list-group-item {
+  text-align: center;
+
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+
+  width: 140px;
+  height: 140px;
+}
+
+.pm-list-group-item:hover {
+  background: rgba(255,255,255,.3);
+}

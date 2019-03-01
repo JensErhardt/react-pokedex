@@ -15,7 +15,6 @@ var pokeRoutes = require('./routes/pokemon');
 
 require('./configs/database');
 
-
 const app = express();
 
 app.use(cors());

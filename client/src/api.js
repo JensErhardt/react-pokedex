@@ -12,9 +12,17 @@ const errHandler = err => {
 export default {
   service: service,
 
-  getPokemon() {
+  getAllPokemon() {
     return service
     .get('/pokemon')
+    .then(res => res.data)
+    .catch(errHandler);
+  },
+
+  getOnePokemon(id) {
+    console.log("api getOnePokemon", id)
+    return service
+    .get('/pokemon/' + id)
     .then(res => res.data)
     .catch(errHandler);
   },

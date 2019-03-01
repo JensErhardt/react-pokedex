@@ -4,8 +4,6 @@ import SearchBar from './SearchBar';
 import Sprite from './Sprite';
 import api from '../api';
 
-import './List.css'
-
 class List extends Component {
   constructor(props) {
     super(props)
@@ -16,7 +14,7 @@ class List extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.getList = this.getList.bind(this);
+    this.getMob = this.getMob.bind(this);
   }
 
   handleChange(e) {
@@ -26,8 +24,8 @@ class List extends Component {
     this.setState({ searchValue })
   }
 
-  getList() {
-    api.getPokemon()
+  getMob() {
+    api.getAllPokemon()
       .then(pokemon => {
         const list = this.loadList(pokemon);
         this.setState({
@@ -53,7 +51,7 @@ class List extends Component {
   }
 
   componentDidMount() {
-    this.getList();
+    this.getMob();
   }
 
   render() {
@@ -70,7 +68,7 @@ class List extends Component {
             {pokemon.map((e) =>
              // <li key={e.pokemonId} className="m-1 pm-list-group-item">
                 <Sprite
-                  id={e.pokemonId}
+                  id={e.id}
                   name={e.name}
                   front={e.front}
                   back={e.back}

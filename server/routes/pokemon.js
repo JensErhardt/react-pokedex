@@ -6,12 +6,17 @@ var router = express.Router();
 
 // Get all pokemon from db
 router.get('/', (req, res, next) => {
-
   Pokemon.find()
     .then(data => {
       res.json(data)
     })
     .catch(err => next(err))
+});
+
+// Get one pokemon by pokemonId from db
+router.get('/:id', (req, res, next) => {
+  const id = req.params.id;
+  console.log("findOne", id)
 });
 
 // Bootstrap db
