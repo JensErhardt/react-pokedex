@@ -1,9 +1,11 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { genericTypes } from './types';
 
 import "./Sprite.css"
 
-const Sprite = ({ id, name, front, back }) => {
+const Sprite = ({ id, name, front, back, types }) => {
 
   const flipFront = (e) => {
     e.preventDefault();
@@ -15,8 +17,21 @@ const Sprite = ({ id, name, front, back }) => {
     return e.currentTarget.src = back;
   }
 
+  const getTypes = (types) => {
+    if (types.length === 1) {
+      return (genericTypes[types[0]]
+        + "none repeat scroll 0% 0%");
+    }
+
+    if (types.length === 2) {
+      return ("rgba(0, 0, 0, 0) linear-gradient(90deg, " 
+      + genericTypes[types[0]] + " 50%, " 
+      + genericTypes[types[1]] + "50%) repeat scroll 0% 0%");
+    }
+  }
+
   return (
-    <div className="pm-sprite mr-auto ml-auto">
+    <div className="m-2 pm-list-group-item pm-sprite" style={{ background: getTypes(types) }}>
       <Link className="pm-list-link" to={"/pokemon/" + id}>
         <img
           className="mt-2"

@@ -29,12 +29,27 @@ class List extends Component {
   getList() {
     api.getPokemon()
       .then(pokemon => {
-
+        const list = this.loadList(pokemon);
         this.setState({
-          pokemon,
-        })
+          pokemon: list
+        });
       })
       .catch(err => console.log(err));
+  }
+
+  loadList(pokemon) {
+    const list = [];
+
+    for (const i in pokemon) {
+      list.push({ 
+          id: pokemon[i].pokemonId,
+          name: pokemon[i].name,
+          front: pokemon[i].sprites.front,
+          back: pokemon[i].sprites.back,
+          types: pokemon[i].types
+        });
+    }
+    return list;
   }
 
   componentDidMount() {
@@ -53,14 +68,15 @@ class List extends Component {
         <div className="row">
           <ul>
             {pokemon.map((e) =>
-              <li className="m-1 pm-list-group-item" key={e._id}>
+             // <li key={e.pokemonId} className="m-1 pm-list-group-item">
                 <Sprite
                   id={e.pokemonId}
                   name={e.name}
-                  front={e.sprites.front}
-                  back={e.sprites.back}
+                  front={e.front}
+                  back={e.back}
+                  types={e.types}
                 />
-              </li>
+            //  </li>
             )}
           </ul>
         </div>
