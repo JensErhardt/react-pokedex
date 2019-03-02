@@ -1,4 +1,16 @@
 
+  export function getTypes(types) {
+    if (types.length === 1) {
+      return (genericTypes[types[0]]
+        + "none repeat scroll 0% 0%");
+    }
+
+    if (types.length === 2) {
+      return ("rgba(0, 0, 0, 0) linear-gradient(90deg, " 
+      + genericTypes[types[0]] + " 50%, " 
+      + genericTypes[types[1]] + "50%) repeat scroll 0% 0%");
+    }
+  }
 
 export const genericTypes = {
   water:    "rgb(104, 144, 240)",

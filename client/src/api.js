@@ -20,7 +20,6 @@ export default {
   },
 
   getOnePokemon(id) {
-    console.log("api getOnePokemon", id)
     return service
     .get('/pokemon/' + id)
     .then(res => res.data)

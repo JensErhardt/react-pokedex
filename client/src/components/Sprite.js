@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { genericTypes } from './types';
+import { getTypes } from './types';
 
 import "./Sprite.css"
 
@@ -15,19 +15,6 @@ const Sprite = ({ id, name, front, back, types }) => {
   const flipBack = (e) => {
     e.preventDefault();
     return e.currentTarget.src = back;
-  }
-
-  const getTypes = (types) => {
-    if (types.length === 1) {
-      return (genericTypes[types[0]]
-        + "none repeat scroll 0% 0%");
-    }
-
-    if (types.length === 2) {
-      return ("rgba(0, 0, 0, 0) linear-gradient(90deg, " 
-      + genericTypes[types[0]] + " 50%, " 
-      + genericTypes[types[1]] + "50%) repeat scroll 0% 0%");
-    }
   }
 
   return (
