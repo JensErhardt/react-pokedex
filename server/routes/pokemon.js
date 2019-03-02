@@ -10,13 +10,18 @@ router.get('/', (req, res, next) => {
     .then(data => {
       res.json(data)
     })
-    .catch(err => next(err))
+    .catch(err => next(err));
 });
 
 // Get one pokemon by pokemonId from db
 router.get('/:id', (req, res, next) => {
   const id = req.params.id;
-  console.log("findOne", id)
+
+  Pokemon.findOne({ pokemonId: id })
+    .then(data => {
+      res.json(data)
+    })
+    .catch(err => next(err));
 });
 
 // Bootstrap db
