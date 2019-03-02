@@ -40,5 +40,36 @@
   padding: 15px;
   font-size: 24px;
   color: white;;
-  filter: brightness(70%);
+  filter: brightness(80%);
+}
+
+#detail-header {
+  padding: 15px;
+  display: flex;
+}
+
+#monster-sprite {
+  width: 140px;
+  height: 140px;
+}
+
+#detail-infobox {
+  flex-grow: 1;
+}
+
+#detail-types-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#detail-type {
+  padding: 1px 10px 5px;
+}
+
+#detail-id {
+  font-size: 30px;
+  flex-grow: 1;
+  text-align: right;
+  flex-shrink: 1;
 }

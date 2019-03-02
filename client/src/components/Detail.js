@@ -23,6 +23,9 @@ class Detail extends Component {
           name: pokemon.name,
           id: pokemon.pokemonId,
           species: pokemon.species,
+          flavorText: pokemon.species.flavorText,
+          front: pokemon.sprites.front,
+          back: pokemon.sprites.back,
           sprites: pokemon.sprites,
           stats: pokemon.stats,
           types: pokemon.types
@@ -39,17 +42,58 @@ class Detail extends Component {
   render() {
     const state = this.state;
     const types = state.types;
-
+    console.log("state", state)
     return (
       <div className="detail-view-bg" style={types && { background: getTypes(types) }} >
-          <div id="detail-panel">
-            <div id="detail-panel-header" style={types && { background: getTypes(types) }}>
+        <div id="detail-panel">
+
+          <div id="detail-panel-header" style={types && { background: getTypes(types) }}>
             <h1>{state.name}</h1>
+          </div>
+
+          <div id="detail-header">
+            <div id="monster-sprite">
+              <img
+                src={state.front} 
+                alt="monster-sprite"
+              />
             </div>
-            <p>This a test with css</p>
-            <div className="div">TEST</div>
+            <div id="detail-infobox">
+              <div id="detail-types-num">
+                {types && this.renderTypes(types)}
+                {state.id && this.renderId(state.id)}
+              </div>
+              <div id="detail-stats">
+                {state.stats && this.renderStats(state.stats)}
+              </div>
+            </div>
+          </div>
+          
+          <div id="detail-below-header">
+          {state.flavorText}
+          </div>
+
+          <div className="div">TEST</div>
         </div>
       </div>
+    )
+  }
+  renderTypes(types) {
+    return types.map(e =>
+      <div
+        id="detail-type"
+        style={types && { background: getTypes(types) }}>{e}
+      </div>
+    )
+  }
+
+  renderId(id) {
+    return <div id="detail-id">#{id}</div>
+  }
+
+  renderStats(stats) {
+    return stats.map(e =>
+      <div id="detail-stats-row">{e.name} {e.base}</div>
     )
   }
 }
