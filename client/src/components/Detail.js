@@ -42,7 +42,7 @@ class Detail extends Component {
   render() {
     const state = this.state;
     const types = state.types;
-    console.log("state", state)
+
     return (
       <div className="detail-view-bg" style={types && { background: getTypes(types) }} >
         <div id="detail-panel">
@@ -54,7 +54,7 @@ class Detail extends Component {
           <div id="detail-header">
             <div id="monster-sprite">
               <img
-                src={state.front} 
+                src={state.front}
                 alt="monster-sprite"
               />
             </div>
@@ -68,12 +68,15 @@ class Detail extends Component {
               </div>
             </div>
           </div>
-          
+
           <div id="detail-below-header">
-          {state.flavorText}
+            {state.flavorText}
           </div>
 
-          <div className="div">TEST</div>
+        </div>
+
+        <div class="bg">
+          <span class="shape"></span>
         </div>
       </div>
     )

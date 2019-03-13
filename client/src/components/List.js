@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import Sprite from './Sprite';
 import api from '../api';
+import http from '../http';
 
 class List extends Component {
   constructor(props) {
@@ -14,7 +15,8 @@ class List extends Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.getMob = this.getMob.bind(this);
+    //this.getMob = this.getMob.bind(this);
+    this.getAll = this.getAll.bind(this);
   }
 
   handleChange(e) {
@@ -24,7 +26,17 @@ class List extends Component {
     this.setState({ searchValue })
   }
 
-  getMob() {
+  async getAll() {
+    const response = await http.get("http://localhost:3030/api/pokemon");
+    const pokemon = await response.json();
+     
+    const list = this.loadList(pokemon)
+    this.setState({
+      pokemon: list,
+    });
+  }
+
+/*   getMob() {
     api.getAllPokemon()
       .then(pokemon => {
         const list = this.loadList(pokemon);
@@ -33,7 +45,7 @@ class List extends Component {
         });
       })
       .catch(err => console.log(err));
-  }
+  } */
 
   loadList(pokemon) {
     const list = [];
@@ -50,8 +62,9 @@ class List extends Component {
     return list;
   }
 
-  componentDidMount() {
-    this.getMob();
+  async componentDidMount() {
+    this.getAll();
+    // this.getMob();
   }
 
   render() {

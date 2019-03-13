@@ -1,21 +1,3 @@
-@keyframes test {
-  25% { background-color: green; width: 200px; }
-  50% { background-color: purple; }
-  75% { background-color: orange; }
-  100% { background-color: blue; }
-}
-.div {
-  background-color: red;
-  width: 100px;
-  height: auto;
-  animation-name: test;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-}
-.div:hover {
- transform: scale(1.2);
-}
-
 .detail-view-bg {
   position: absolute;
   width: 100vw;
@@ -31,6 +13,8 @@
   top: 0;
   left: 10px;
   right: 10px;
+  position: absolute;
+  animation: slide-in-btm 1.7s both;
 }
 
 #detail-panel-header {
@@ -72,4 +56,13 @@
   flex-grow: 1;
   text-align: right;
   flex-shrink: 1;
+}
+
+@keyframes slide-in-btm {
+  0% {
+    top: 100%;
+  }
+  100% {
+    top: 0%;
+  }
 }
